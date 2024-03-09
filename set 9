@@ -1,0 +1,61 @@
+Create a factor corresponding to height of women dataset:
+R
+Copy code
+# Load the dataset
+data("women")
+
+# Create factor corresponding to height
+height_factor <- cut(women$height, breaks = 3, labels = c("Short", "Medium", "Tall"))
+print(height_factor)
+Extract five levels of factor created from a random sample from the LETTERS:
+R
+Copy code
+# Generate a random sample of LETTERS
+set.seed(123)
+random_letters <- sample(LETTERS, 10, replace = TRUE)
+
+# Convert it to a factor
+factor_letters <- factor(random_letters)
+
+# Extract five levels
+five_levels <- levels(factor_letters)[1:5]
+print("Five levels of the factor:")
+print(five_levels)
+Create an array of two 3x3 matrices and print specific elements:
+R
+Copy code
+# Given vectors
+vector1 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+vector2 <- c(9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+# Create the array
+array <- array(c(vector1, vector2), dim = c(3, 3, 2))
+
+# Print the second row of the second matrix
+print("Second row of the second matrix:")
+print(array[2,,2])
+
+# Print the element in the 3rd row and 3rd column of the 1st matrix
+print("Element in the 3rd row and 3rd column of the 1st matrix:")
+print(array[3,3,1])
+Draw bar chart and histogram using Titanic dataset:
+R
+Copy code
+# Load the dataset
+data("Titanic")
+
+# a. Draw a bar chart to show details of “Survived” on the Titanic based on passenger Class
+barplot(Titanic[,,,"Yes"], beside = TRUE, legend.text = TRUE, col = c("red", "green", "blue"), main = "Survival on Titanic by Passenger Class", xlab = "Passenger Class", ylab = "Number of Passengers")
+
+# b. Modify the above plot based on gender of people who survived
+barplot(Titanic[,,2,"Yes"], beside = TRUE, legend.text = TRUE, col = c("red", "green", "blue"), main = "Survival on Titanic by Passenger Class and Gender", xlab = "Passenger Class", ylab = "Number of Passengers", names.arg = c("1st", "2nd", "3rd"))
+
+# c. Draw histogram plot to show distribution of feature “Age”
+hist(Titanic$Age, main = "Distribution of Passenger Age on Titanic", xlab = "Age", ylab = "Frequency")
+These programs will help you accomplish the tasks you've described.
+
+
+
+
+
+
