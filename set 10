@@ -1,0 +1,111 @@
+Exploring the USArrests dataset:
+
+R
+Copy code
+# Load the dataset
+data("USArrests")
+
+# (i) a. Summary of the dataset
+summary(USArrests)
+
+# (i) b. State with the largest total number of rape
+max_rape_state <- names(USArrests$Rape[which.max(USArrests$Rape)])
+print(paste("State with the largest total number of rape:", max_rape_state))
+
+# (i) c. States with max & min crime rates for murder
+max_murder_states <- names(USArrests$Murder[which.max(USArrests$Murder)])
+min_murder_states <- names(USArrests$Murder[which.min(USArrests$Murder)])
+print(paste("State(s) with the maximum crime rate for murder:", max_murder_states))
+print(paste("State(s) with the minimum crime rate for murder:", min_murder_states))
+
+# (ii) a. Correlation among the features
+correlation <- cor(USArrests)
+print("Correlation among the features:")
+print(correlation)
+
+# (ii) b. States which have assault arrests more than median of the country
+median_assault <- median(USArrests$Assault)
+states_above_median_assault <- rownames(USArrests)[USArrests$Assault > median_assault]
+print("States with assault arrests more than median of the country:")
+print(states_above_median_assault)
+
+# (ii) c. States in the bottom 25% of murder
+bottom_25_percent <- quantile(USArrests$Murder, probs = 0.25)
+states_bottom_25_percent <- rownames(USArrests)[USArrests$Murder < bottom_25_percent]
+print("States in the bottom 25% of murder:")
+print(states_bottom_25_percent)
+
+# (iii) a. Histogram and density plot of murder arrests
+hist(USArrests$Murder, main = "Histogram of Murder Arrests", xlab = "Murder Arrests", ylab = "Frequency")
+lines(density(USArrests$Murder), col = "blue")
+
+# (iii) b. Relationship between murder arrest rate and proportion of the population that is urbanised
+plot(USArrests$UrbanPop, USArrests$Murder, xlab = "Urban Population", ylab = "Murder Arrests", main = "Relationship between Urban Population and Murder Arrests")
+points(USArrests$UrbanPop, USArrests$Assault, col = heat.colors(length(USArrests$UrbanPop)))
+
+# (iii) c. Bar graph showing the murder rate for each state
+barplot(USArrests$Murder, names.arg = rownames(USArrests), main = "Murder Rate for Each State", xlab = "State", ylab = "Murder Rate")
+Randomly sample the iris dataset and create logistic regression:
+
+R
+Copy code
+# Load the dataset
+data("iris")
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Sample the data
+sample_index <- sample(nrow(iris), 0.8 * nrow(iris))
+train_data <- iris[sample_index, ]
+test_data <- iris[-sample_index, ]
+
+# Create logistic regression model
+log_model <- glm(Species ~ Petal.Width + Petal.Length, data = train_data, family = binomial)
+
+# Predict probabilities using test data
+probabilities <- predict(log_model, newdata = test_data, type = "response")
+
+# Convert probabilities to predicted classes
+predicted_classes <- ifelse(probabilities > 0.5, "virginica", "not virginica")
+
+# Create confusion matrix
+confusion_matrix <- table(test_data$Species, predicted_classes)
+print("Confusion matrix:")
+print(confusion_matrix)
+Save information of a data frame in a file and display it:
+
+R
+Copy code
+# Assuming 'data_frame' is your data frame
+data_frame <- data.frame(x = c(1, 2, 3), y = c("a", "b", "c"))
+
+# Save data frame to a file
+write.csv(data_frame, "data_frame.csv")
+
+# Display information of the file
+file_content <- read.csv("data_frame.csv")
+print("Contents of data frame:")
+print(file_content)
+Call the airquality dataset, check if it's a data frame, order it, remove specified variables, and display it:
+
+R
+Copy code
+# Load the dataset
+data("airquality")
+
+# Check if it's a data frame
+is_data_frame <- is.data.frame(airquality)
+print("Is airquality a data frame?")
+print(is_data_frame)
+
+# Order the entire data frame by the first and second column
+airquality <- airquality[order(airquality$Month, airquality$Day), ]
+
+# Remove the variables 'Solar.R' and 'Wind'
+airquality <- airquality[, !(names(airquality) %in% c("Solar.R", "Wind"))]
+
+# Display the modified data frame
+print("Modified airquality data frame:")
+print(airquality)
+These codes will help you accomplish the tasks you've described. Adjust them as needed for your specific requirements.
