@@ -1,0 +1,42 @@
+Extract five levels of factor created from a random sample from the LETTERS:
+R
+Copy code
+# Generate a random sample of LETTERS
+set.seed(123)
+random_letters <- sample(LETTERS, 10, replace = TRUE)
+
+# Convert it to a factor
+factor_letters <- factor(random_letters)
+
+# Extract five levels
+five_levels <- levels(factor_letters)[1:5]
+print("Five levels of the factor:")
+print(five_levels)
+Create a vector with 10 random integer values between -50 and +50:
+R
+Copy code
+# Generate 10 random integer values
+set.seed(123)
+random_integers <- sample(-50:50, 10, replace = TRUE)
+print("Vector of 10 random integers between -50 and +50:")
+print(random_integers)
+Print numbers from 1 to 100 with conditions for Fizz, Buzz, and FizzBuzz:
+R
+Copy code
+# Function to print numbers with conditions
+print_numbers <- function(n) {
+  for (i in 1:n) {
+    if (i %% 3 == 0 && i %% 5 == 0) {
+      print("FizzBuzz")
+    } else if (i %% 3 == 0) {
+      print("Fizz")
+    } else if (i %% 5 == 0) {
+      print("Buzz")
+    } else {
+      print(i)
+    }
+  }
+}
+
+# Call the function to print numbers from 1 to 100
+print_numbers(100)
