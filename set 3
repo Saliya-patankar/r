@@ -1,0 +1,82 @@
+Create three vectors and display their content and type:
+R
+Copy code
+# Create numeric vector
+numeric_vector <- c(1, 2, 3, 4, 5)
+cat("Numeric vector:", numeric_vector, "\tType:", typeof(numeric_vector), "\n")
+
+# Create character vector
+character_vector <- c("a", "b", "c", "d", "e")
+cat("Character vector:", character_vector, "\tType:", typeof(character_vector), "\n")
+
+# Create logical vector
+logical_vector <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+cat("Logical vector:", logical_vector, "\tType:", typeof(logical_vector), "\n")
+Create the exam_data dataframe:
+R
+Copy code
+exam_data <- data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+
+# a. Extract 3rd and 5th rows with 1st and 3rd columns
+extracted_data <- exam_data[c(3, 5), c(1, 3)]
+print("Extracted Data:")
+print(extracted_data)
+
+# b. Add a new column named country
+Country <- c("USA", "USA", "USA", "USA", "UK", "USA", "USA", "India", "USA", "USA")
+exam_data$country <- Country
+print("Dataframe with new column:")
+print(exam_data)
+
+# c. Add new row(s) to an existing data frame
+new_exam_data <- data.frame(name = c('Robert', 'Sophia'), score = c(10.5, 9), attempts = c(1, 3), qualify = c('yes', 'no'))
+exam_data <- rbind(exam_data, new_exam_data)
+print("Dataframe with new row(s):")
+print(exam_data)
+
+# d. Sort the data frame by name and score
+sorted_data <- exam_data[order(exam_data$name, exam_data$score), ]
+print("Sorted Dataframe:")
+print(sorted_data)
+
+# e. Save the information of a data frame in a file and display the information of the file
+write.csv(exam_data, "exam_data.csv")
+file_info <- read.csv("exam_data.csv")
+print("Information of the file:")
+print(file_info)
+Create a factor corresponding to height of women dataset:
+R
+Copy code
+# Load the dataset
+data("women")
+
+# Create factor corresponding to height
+height_factor <- cut(women$height, breaks = 3, labels = c("Short", "Medium", "Tall"))
+print(height_factor)
+Create matrices with labels and fill them:
+R
+Copy code
+# Create a 5x4 matrix filled by rows
+matrix_rows <- matrix(1:20, nrow = 5, ncol = 4, byrow = TRUE, dimnames = list(c("Row1", "Row2", "Row3", "Row4", "Row5"), NULL))
+print("Matrix filled by rows:")
+print(matrix_rows)
+
+# Create a 3x3 matrix with labels filled by rows
+matrix_rows_labels <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE, dimnames = list(c("Row1", "Row2", "Row3"), c("A", "B", "C")))
+print("Matrix with labels filled by rows:")
+print(matrix_rows_labels)
+
+# Create a 2x2 matrix with labels filled by columns
+matrix_columns_labels <- matrix(1:4, nrow = 2, ncol = 2, byrow = FALSE, dimnames = list(NULL, c("A", "B")))
+print("Matrix with labels filled by columns:")
+print(matrix_columns_labels)
+
+
+
+
+
