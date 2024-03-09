@@ -1,0 +1,75 @@
+Draw an empty plot and specify axes limits:
+R
+Copy code
+# Draw an empty plot
+plot.new()
+
+# Draw an empty plot with specified axes limits
+plot(NA, NA, xlim = c(0, 10), ylim = c(0, 10), xlab = "X-axis", ylab = "Y-axis", main = "Empty Plot with Axes Limits")
+Create an array with specified dimensions and names:
+R
+Copy code
+# Define vector of values
+values <- c(1, 2, 3, 4, 5, 6)
+
+# Define vector of dimensions
+dims <- c(2, 3, 2)  # 2 rows, 3 columns, 2 "tables"
+
+# Define names for each dimension
+dimnames <- list(rows = c("row1", "row2"), columns = c("col1", "col2", "col3"), tables = c("table1", "table2"))
+
+# Create the array
+arr <- array(values, dim = dims, dimnames = dimnames)
+
+# Print the array
+print(arr)
+Summary Statistics and Data Transformation of airquality dataset:
+R
+Copy code
+# Load the dataset
+data("airquality")
+
+# (i) Get the Summary Statistics of air quality dataset
+summary(airquality)
+
+# (iii) Melt airquality data set and display as a long-format data
+library(reshape2)
+melted_data <- melt(airquality)
+print("(iii) Melted airquality data:")
+print(melted_data)
+
+# (iv) Melt airquality data and specify month and day to be “ID variables”
+melted_data_with_id <- melt(airquality, id.vars = c("Month", "Day"))
+print("(iv) Melted airquality data with month and day as ID variables:")
+print(melted_data_with_id)
+
+# (v) Cast the molten airquality data set with respect to month and date features
+casted_data <- dcast(melted_data_with_id, Month + Day ~ variable, value.var = "value")
+print("(v) Casted airquality data:")
+print(casted_data)
+
+# (vi) Use cast function appropriately and compute the average of Ozone, Solar.R , Wind and temperature per month
+average_per_month <- dcast(melted_data, Month ~ variable, mean)
+print("(vi) Average of Ozone, Solar.R, Wind, and Temperature per month:")
+print(average_per_month)
+Create a regression model for a given data frame and predict sales:
+R
+Copy code
+# Create a data frame
+data_frame <- data.frame(Spends = c(2000, 3000, 4000, 5000, 6000),
+                         Sales = c(4000, 4500, 4800, 5100, 5500))
+
+# Create a regression model
+regression_model <- lm(Sales ~ Spends, data = data_frame)
+
+# Predict sales if Spend = 13500
+predicted_sales <- predict(regression_model, newdata = data.frame(Spends = 13500))
+print("Predicted Sales if Spend = 13500:")
+print(predicted_sales)
+This code creates a linear regression model to predict sales based on the amount spent on advertising and then predicts the sales when the spend is $13500.
+
+
+
+
+
+
