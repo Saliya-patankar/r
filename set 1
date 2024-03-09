@@ -1,0 +1,79 @@
+a. Multi Regression Model:
+R
+Copy code
+# Assuming you have a dataset named 'chicken_data' containing columns 'Weight', 'Time', and 'Diet'
+
+# Load necessary library
+library(tidyverse)
+
+# Create the multi regression model
+model <- lm(Weight ~ Time + Diet, data = chicken_data)
+
+# b. Predict weight for Time=10 and Diet=1
+new_data <- data.frame(Time = 10, Diet = 1)
+predicted_weight <- predict(model, newdata = new_data)
+print(predicted_weight)
+
+# c. Find the error in the model
+error <- sqrt(mean(model$residuals^2))
+print(error)
+(i) Summary Statistics of air quality dataset:
+R
+Copy code
+summary(airquality)
+(ii) Melt airquality dataset and display as long-format data:
+
+R
+Copy code
+library(reshape2)
+melted_data <- melt(airquality)
+print(melted_data)
+(iii) Melt airquality data and specify month and day to be “ID variables”:
+
+R
+Copy code
+melted_data <- melt(airquality, id.vars = c("Month", "Day"))
+print(melted_data)
+(iv) Cast the molten airquality dataset with respect to month and date features:
+
+R
+Copy code
+casted_data <- dcast(melted_data, Month + Day ~ variable)
+print(casted_data)
+(v) Compute the average of Ozone, Solar.R, Wind, and temperature per month:
+
+R
+Copy code
+averages <- melted_data %>%
+  group_by(Month, variable) %>%
+  summarise(avg_value = mean(value))
+print(averages)
+Randomly Sample the iris dataset, create Logistics regression, and Confusion Matrix:
+R
+Copy code
+# Load necessary libraries
+library(caTools)
+library(nnet)
+library(caret)
+
+# Sample dataset
+set.seed(123)
+sample_index <- sample.split(iris$Species, SplitRatio = 0.8)
+train_data <- iris[sample_index, ]
+test_data <- iris[!sample_index, ]
+
+# Create logistic regression model
+log_model <- multinom(Species ~ Petal.Width + Petal.Length, data = train_data)
+
+# Predict probabilities
+probabilities <- predict(log_model, newdata = test_data, type = "probs")
+
+# Create confusion matrix
+conf_matrix <- confusionMatrix(data = probabilities, reference = test_data$Species)
+print(conf_matrix)
+Create an array and display its content:
+R
+Copy code
+# Assuming you have four columns 'A', 'B', 'C', 'D', three rows, and two tables
+array_data <- array(data = c(1:24), dim = c(3, 4, 2), dimnames = list(c("Row1", "Row2", "Row3"), c("A", "B", "C", "D"), c("Table1", "Table2")))
+print(array_data)
