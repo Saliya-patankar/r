@@ -1,0 +1,80 @@
+Create the exam_data dataframe:
+R
+Copy code
+exam_data <- data.frame(
+  name = c('Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'),
+  score = c(12.5, 9, 16.5, 12, 9, 20, 14.5, 13.5, 8, 19),
+  attempts = c(1, 3, 2, 3, 2, 3, 1, 1, 2, 1),
+  qualify = c('yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes')
+)
+Create a list of elements using vectors, matrices, and a function:
+R
+Copy code
+# Create vectors, matrices, and a function
+vector1 <- c(1, 2, 3, 4, 5)
+matrix1 <- matrix(1:9, nrow = 3, ncol = 3)
+custom_function <- function(x) {
+  return(x^2)
+}
+
+# Create a list
+my_list <- list(vector = vector1, matrix = matrix1, function_result = custom_function(1:5))
+
+# Print content of the list
+print(my_list)
+Explore the USArrests dataset:
+R
+Copy code
+# Load the dataset
+data("USArrests")
+
+# (i) a. Explore the summary of the dataset
+summary(USArrests)
+
+# (i) b. Print the state which saw the largest total number of rape
+largest_rape_state <- rownames(USArrests)[which.max(USArrests$Rape)]
+print(paste("State with largest total number of rape:", largest_rape_state))
+
+# (i) c. Print the states with the max & min crime rates for murder
+max_murder_state <- rownames(USArrests)[which.max(USArrests$Murder)]
+min_murder_state <- rownames(USArrests)[which.min(USArrests$Murder)]
+print(paste("State with max crime rates for murder:", max_murder_state))
+print(paste("State with min crime rates for murder:", min_murder_state))
+
+# (ii) a. Find the correlation among the features
+correlation_matrix <- cor(USArrests)
+print(correlation_matrix)
+
+# (ii) b. Print the states which have assault arrests more than median of the country
+states_high_assault <- rownames(USArrests)[USArrests$Assault > median(USArrests$Assault)]
+print(paste("States with assault arrests more than median:", states_high_assault))
+
+# (ii) c. Print the states that are in the bottom 25% of murder
+states_bottom_25_murder <- rownames(USArrests)[USArrests$Murder < quantile(USArrests$Murder, 0.25)]
+print(paste("States in the bottom 25% of murder:", states_bottom_25_murder))
+
+# (iii) a. Create a histogram and density plot of murder arrests by US state
+hist(USArrests$Murder, main = "Histogram of Murder Arrests", xlab = "Murder Arrests")
+lines(density(USArrests$Murder), col = "blue")
+
+# (iii) b. Create the plot that shows the relationship between murder arrest rate and proportion of the population that is urbanized by state.
+plot(USArrests$UrbanPop, USArrests$Murder, xlab = "Urban Population (%)", ylab = "Murder Arrests", main = "Relationship between Murder Arrest Rate and Urban Population")
+points(USArrests$UrbanPop, USArrests$Murder, col = heat.colors(n = 50))
+
+# (iii) c. Draw a bar graph to show the murder rate for each of the 50 states
+barplot(USArrests$Murder, names.arg = rownames(USArrests), main = "Murder Rate by State", xlab = "State", ylab = "Murder Rate")
+Read a .csv file and display its content:
+R
+Copy code
+# Read the .csv file
+data <- read.csv("your_file.csv")
+
+# Display content
+print(data)
+Replace "your_file.csv" with the path to your .csv file.
+
+
+
+
+
+
