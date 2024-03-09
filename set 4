@@ -1,0 +1,94 @@
+Create an array with specified dimensions and names:
+R
+Copy code
+# Define vector of values
+values <- c(1, 2, 3, 4, 5, 6)
+
+# Define vector of dimensions
+dims <- c(2, 3)  # 2 rows, 3 columns
+
+# Define names for each dimension
+dimnames <- list(rows = c("row1", "row2"), columns = c("col1", "col2", "col3"))
+
+# Create the array
+arr <- array(values, dim = dims, dimnames = dimnames)
+
+# Print the array
+print(arr)
+Load and manipulate the airquality dataset:
+R
+Copy code
+# Load the dataset
+data("airquality")
+
+# Check if it is a data frame
+is_data_frame <- is.data.frame(airquality)
+print("Is airquality a data frame?")
+print(is_data_frame)
+
+# Order the entire data frame by the first and second column
+airquality <- airquality[order(airquality$Month, airquality$Day), ]
+
+# Remove the variables 'Solar.R' and 'Wind'
+airquality <- airquality[, !(names(airquality) %in% c("Solar.R", "Wind"))]
+
+# Display the modified data frame
+print("Modified airquality data frame:")
+print(airquality)
+Load and manipulate the ChickWeight dataset:
+R
+Copy code
+# Load the dataset
+data("ChickWeight")
+
+# (i). Order the data frame in ascending order by feature name “weight” grouped by feature “diet” and Extract the last 6 records from ordered data frame.
+ordered_data <- ChickWeight[order(ChickWeight$weight), ]
+last_six_records <- tail(ordered_data, 6)
+print("(i). Last 6 records ordered by weight and grouped by diet:")
+print(last_six_records)
+
+# (ii) a. Perform melting function based on “Chick", "Time", "Diet" features as ID variables
+library(reshape2)
+melted_data <- melt(ChickWeight, id.vars = c("Chick", "Time", "Diet"))
+
+# (ii) b. Perform cast function to display the mean value of weight grouped by Diet
+casted_mean <- dcast(melted_data, Diet ~ variable, fun.aggregate = mean)
+print("(ii) b. Mean value of weight grouped by Diet:")
+print(casted_mean)
+
+# (ii) c. Perform cast function to display the mode of weight grouped by Diet
+library(dplyr)
+casted_mode <- melted_data %>%
+  group_by(Diet, value) %>%
+  summarise(count = n()) %>%
+  slice(which.max(count)) %>%
+  select(Diet, variable = "weight", mode = value)
+print("(ii) c. Mode of weight grouped by Diet:")
+print(casted_mode)
+Randomly sample the iris dataset and create a logistic regression model:
+R
+Copy code
+# Load the dataset
+data("iris")
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Sample the data
+sample_index <- sample(nrow(iris), 0.8 * nrow(iris))
+train_data <- iris[sample_index, ]
+test_data <- iris[-sample_index, ]
+
+# Create logistic regression model
+log_model <- glm(Species ~ Petal.Width + Petal.Length, data = train_data, family = binomial)
+
+# Predict probabilities using test data
+probabilities <- predict(log_model, newdata = test_data, type = "response")
+
+# Convert probabilities to predicted classes
+predicted_classes <- ifelse(probabilities > 0.5, "virginica", "not virginica")
+
+# Create confusion matrix
+conf_matrix <- table(test_data$Species, predicted_classes)
+print("Confusion matrix:")
+print(conf_matrix)
