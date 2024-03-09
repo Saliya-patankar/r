@@ -1,0 +1,55 @@
+Find factors of a given number:
+R
+Copy code
+# Function to find factors of a given number
+find_factors <- function(n) {
+  factors <- NULL
+  for (i in 1:n) {
+    if (n %% i == 0) {
+      factors <- c(factors, i)
+    }
+  }
+  return(factors)
+}
+
+# Test the function
+number <- 24
+factors <- find_factors(number)
+print(paste("Factors of", number, "are:", factors))
+Create a list of random numbers in normal distribution and count occurrences of each value:
+R
+Copy code
+# Generate random numbers in normal distribution
+set.seed(123)
+random_numbers <- rnorm(100, mean = 0, sd = 1)
+
+# Count occurrences of each value
+occurrences <- table(random_numbers)
+print("Occurrences of each value:")
+print(occurrences)
+Use the Titanic dataset:
+R
+Copy code
+# Load the dataset
+data("Titanic")
+
+# (a) Draw a bar chart to show details of “Survived” on the Titanic based on passenger Class
+barplot(Titanic[,,,"Yes"], beside = TRUE, legend.text = TRUE, col = c("red", "green", "blue"), main = "Survival on Titanic by Passenger Class", xlab = "Passenger Class", ylab = "Number of Passengers")
+
+# (b) Modify the above plot based on gender of people who survived
+barplot(Titanic[,,2,"Yes"], beside = TRUE, legend.text = TRUE, col = c("red", "green", "blue"), main = "Survival on Titanic by Passenger Class and Gender", xlab = "Passenger Class", ylab = "Number of Passengers", names.arg = c("1st", "2nd", "3rd"))
+
+# (c) Draw histogram plot to show distribution of feature “Age”
+hist(Titanic$Age, main = "Distribution of Passenger Age on Titanic", xlab = "Age", ylab = "Frequency")
+Combine three arrays:
+R
+Copy code
+# Generate three arrays
+array1 <- matrix(1:3, nrow = 1)
+array2 <- matrix(4:6, nrow = 1)
+array3 <- matrix(7:9, nrow = 1)
+
+# Combine arrays
+combined_array <- rbind(array1, array2, array3)
+print("Combined array:")
+print(combined_array)
