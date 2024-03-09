@@ -1,0 +1,75 @@
+Create an array of two 3x3 matrices and print specific elements:
+R
+Copy code
+# Given vectors
+vector1 <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+vector2 <- c(9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+# Create the array
+array <- array(c(vector1, vector2), dim = c(3, 3, 2))
+
+# Print the second row of the second matrix
+print("Second row of the second matrix:")
+print(array[2,,2])
+
+# Print the element in the 3rd row and 3rd column of the 1st matrix
+print("Element in the 3rd row and 3rd column of the 1st matrix:")
+print(array[3,3,1])
+Create an array with three columns, three rows, and two "tables":
+R
+Copy code
+# Given vectors
+vector1 <- c(1, 2, 3)
+vector2 <- c(4, 5, 6)
+
+# Create the array
+array <- array(c(vector1, vector2), dim = c(3, 3, 2))
+
+# Print the array
+print("Array:")
+print(array)
+Explore the airquality dataset:
+R
+Copy code
+# Load the dataset
+data("airquality")
+
+# i. Compute the mean temperature (without using built-in function)
+mean_temp <- sum(airquality$Temp) / length(airquality$Temp)
+print(paste("Mean temperature:", mean_temp))
+
+# ii. Extract the first five rows from airquality
+first_five_rows <- airquality[1:5, ]
+print("First five rows from airquality:")
+print(first_five_rows)
+
+# iii. Extract all columns from airquality except Temp and Wind
+subset_airquality <- airquality[, !(names(airquality) %in% c("Temp", "Wind"))]
+print("Subset of airquality:")
+print(subset_airquality)
+
+# iv. Which was the coldest day during the period?
+coldest_day <- airquality$Day[which.min(airquality$Temp)]
+print(paste("Coldest day during the period:", coldest_day))
+
+# v. How many days was the wind speed greater than 17 mph?
+wind_greater_than_17 <- sum(airquality$Wind > 17, na.rm = TRUE)
+print(paste("Number of days with wind speed greater than 17 mph:", wind_greater_than_17))
+Sort a given data frame by name and score:
+R
+Copy code
+# Assuming you have a data frame named 'data_frame'
+data_frame <- data.frame(name = c("John", "Alice", "Bob"),
+                         score = c(20, 15, 18))
+
+# Sort the data frame by name and score
+sorted_data_frame <- data_frame[order(data_frame$name, data_frame$score), ]
+print("Sorted data frame:")
+print(sorted_data_frame)
+Replace "data_frame" with the name of your actual data frame.
+
+
+
+
+
+
